@@ -1,0 +1,36 @@
+<head>
+  <base href="/" />
+  <title>Hello</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+</head>
+
+ <a href="http://192.168.2.10/home" class="btn btn-info">Login</a>
+    <div class="flex-center position-ref full-height">
+        <div class="content">
+        <div class="title m-b-md">
+<form #myForm="ngForm"  class="ng-pristine ng-untouched ng-valid" novalidate="" enctype="multipart/form-data">
+  <div class="form-group">
+                    <label>E-mail</label>
+                    <input class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" required pattern="[a-zA-Z_0-9.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"/>
+                    <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+                          Некорректный email
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea class="form-control"  name="description" [(ngModel)]="user.description" rows="8" cols="80"></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="file" name="file"(change)="onFileSelected($event)" [(ngModel)]="user.file">
+                </div>
+                <div class="form-group">
+                    <button [disabled]="email.invalid" class="btn btn-default" (click)="onUpLoad(user)">Отправить</button>
+                </div>
+                <div *ngIf="done">
+                    <div>Получено от сервера:</div>
+                    <div>Имя: {{receivedUser}}</div>
+                    <div>Возраст: {{receivedUser.age}}</div>
+                </div>
+</form>
+<br><hr>
